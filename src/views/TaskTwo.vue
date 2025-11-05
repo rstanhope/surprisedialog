@@ -115,7 +115,7 @@ const nextItem = async () => {
 
 const endCount = async (speechDetected) => {
     //TODO: save speechDetected boolean to Firebase
-    console.log(speechDetected);
+    console.log("speech detected?",speechDetected);
     
     //hide count up component
     await wait(500);
