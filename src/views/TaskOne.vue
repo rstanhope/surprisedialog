@@ -17,7 +17,7 @@
         <div class="d-flex justify-center mt-4">
             {{ participantStore.index + 1 }} of {{ participantStore.list.length }}
         </div>
-        <v-dialog v-model="showCountUp" fullscreen="" persistent="">
+        <v-dialog v-model="showCountUp" fullscreen="" persistent="" transition="none">
             <CountUpComponent v-if="showCountUp" @end-count="endCount"></CountUpComponent>
         </v-dialog>
     </v-container>

@@ -48,7 +48,7 @@
             {{ participantStore.index + 1 }} of {{ participantStore.list.length }}
         </div>
     </v-container>
-    <v-dialog v-model="showCountUp" fullscreen="" persistent="">
+    <v-dialog v-model="showCountUp" fullscreen="" persistent="" transition="none">
         <CountUpComponent v-if="showCountUp" @end-count="endCount"></CountUpComponent>
     </v-dialog>
 </template>
