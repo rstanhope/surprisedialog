@@ -19,7 +19,7 @@ Surprise Dialog Experiment
 
 See [Vite Configuration Reference](https://vite.dev/config/).
 
-## Project Setup
+## Project Setup (first time only or when new packages have been installed)
 
 ```sh
 npm install
@@ -32,6 +32,8 @@ npm run dev
 ```
 
 Launch browser and visit https://localhost:5173?pid=test
+
+The "pid" URL parameter represents the participant's unique identifier
 
 ### Compile and Minify for Production
 
@@ -47,6 +49,29 @@ npm run lint
 
 ### Deployment
 ```sh
+npm run build
 firebase login
 firebase deploy
 ```
+
+### Switching between task one and task two
+- Edit /src/stores/userParticipantStore.js
+  - Task one: Question answer congruence task
+  - Task two: Surprise task
+
+``` js
+const taskType = ref("t1"); //t1 = task one, t2 = task two
+```
+
+- Follow the above steps to compile/minify and deploy to Firebase hosting
+
+### List text file
+- The public/list.txt file should be a tab-separated file with 9 columns
+
+| item | sentence | itemType | audio | t1choice1 | t1choice2 | t2image | t2choice1 | t2choice2 |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| novel | He wrote a novel | critical | novel_absent.mp3 | What did John do? | What did John write? | placeholderimage.png | Oh, you're surprised that he wrote a novel, instead of doing something else? | Oh, you're surprised that he wrote a novel, instead of writing something else? |
+| melanie | It's Melanie | filler | ss_melanie2_1_1.mp3 | Who is it? | Is it Madelyn? |  |  | 
+
+- Each row should have a total of 9 columns.
+- Values in the "t2" columns can be empty but must have the correct number of spaced tabs to maintain a consistent 9 columns throughout the whole text file.
