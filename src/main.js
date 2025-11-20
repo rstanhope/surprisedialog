@@ -19,6 +19,23 @@ const vuetify = createVuetify({
     },
 })
 
+//firebase
+import { initializeApp } from "firebase/app";
+
+// Your web app's Firebase configuration
+const firebaseConfig = {
+  apiKey: "AIzaSyCt88F8xAQVaHS3SdcqswoLux4jhBJgmbk",
+  authDomain: "surprisedialog-experiment.firebaseapp.com",
+  databaseURL: "https://surprisedialog-experiment-default-rtdb.firebaseio.com",
+  projectId: "surprisedialog-experiment",
+  storageBucket: "surprisedialog-experiment.firebasestorage.app",
+  messagingSenderId: "665936788418",
+  appId: "1:665936788418:web:33922ef4d72ac02b15745b"
+};
+
+// Initialize Firebase
+initializeApp(firebaseConfig);
+
 //sweet alert
 import 'sweetalert2/dist/sweetalert2.min.css'
 

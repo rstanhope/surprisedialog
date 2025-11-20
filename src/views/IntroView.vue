@@ -56,6 +56,7 @@ const next = async () => {
     try {
         let res = await loadLists("list.txt");
         if (res.errors.length > 0) {
+            console.log(res);
             throw ("Error loading list file");
         } else {
             participantStore.list = res.data;

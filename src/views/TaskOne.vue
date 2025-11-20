@@ -10,7 +10,7 @@
             </h3>
             <div class="d-flex justify-center mt-4">
                 <v-btn class="mr-4" color="purple-darken-2" @click="onResponseClick(1)">{{ currentItem.t1choice1
-                    }}</v-btn>
+                }}</v-btn>
                 <v-btn color="purple-darken-2" @click="onResponseClick(2)">{{ currentItem.t1choice2 }}</v-btn>
             </div>
         </div>
@@ -31,13 +31,14 @@ import UseWait from '@/composables/UseWait';
 import Swal from 'sweetalert2';
 import { useRouter } from 'vue-router'
 import CountUpComponent from '@/components/CountUpComponent.vue';
+import { getDatabase, ref as dbRef, serverTimestamp, push } from "firebase/database";
 
 const participantStore = useParticipantStore();
 const { playSoundAsync } = UsePlaySound();
 const state = ref("listening");// listening, responding
 const showCountUp = ref(false);
 const router = useRouter();
-const {wait} = UseWait();
+const { wait } = UseWait();
 
 
 const currentItem = computed(() => participantStore.list[participantStore.index])
@@ -57,8 +58,14 @@ const play = async () => {
 }
 
 const onResponseClick = (response) => {
-    //TODO: store response on Firebase
-    console.log(response);
+    //store response on Firebase
+    let dataToSave = { ...currentItem.value };
+    dataToSave.response = response.value;
+    dataToSave.timestamp = serverTimestamp();
+    dataToSave.pid = participantStore.pid;
+    push(dbRef(getDatabase(), participantStore.pid), dataToSave);
+
+    //console.log(response);
 
     //incremenet item index
     participantStore.index += 1;
@@ -73,12 +80,12 @@ const onResponseClick = (response) => {
 //when count up mini-task is completed, play nexttrial
 const endCount = async (speechDetected) => {
     //TODO: save speechDetected boolean to Firebase
-    console.log("speech detected?",speechDetected);
+    console.log("speech detected?", speechDetected);
 
     //hide count up component
     await wait(500);
     showCountUp.value = false;
-    
+
     //show fixation cross for 1000ms
     state.value = "fixation"
     await wait(1000);
