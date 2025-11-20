@@ -75,3 +75,11 @@ const taskType = ref("t1"); //t1 = task one, t2 = task two
 
 - Each row should have a total of 9 columns.
 - Values in the "t2" columns can be empty but must have the correct number of spaced tabs to maintain a consistent 9 columns throughout the whole text file.
+
+### EndView.vue
+- At the end of the task, participants should be redirected to either a Qualtrics survey (post task survey) or the Prolific completion URL
+- Replace the redirect_url variable to point to the approriate URL
+``` js
+//replace this with Qualtrics survey URL or Prolific completion URL
+let redirect_url = "https://www.google.com";
+```
