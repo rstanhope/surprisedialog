@@ -8,7 +8,7 @@
             <h3>
                 Based on the way the speaker said the sentence, which question do you think they were responding to?
             </h3>
-            <div class="d-flex justify-center mt-4">
+            <div class="d-flex justify-center mt-4" v-if="currentItem">
                 <v-btn class="mr-4" color="purple-darken-2" @click="onResponseClick(1)">{{ currentItem.t1choice1
                 }}</v-btn>
                 <v-btn color="purple-darken-2" @click="onResponseClick(2)">{{ currentItem.t1choice2 }}</v-btn>
