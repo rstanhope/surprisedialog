@@ -54,13 +54,14 @@
 </template>
 
 <script setup>
-import { computed, onMounted, ref } from 'vue';
+import { computed, onMounted, ref, toRaw } from 'vue';
 import { useParticipantStore } from "@/stores/useParticipantStore.js";
 import UsePlaySound from "@/composables/UsePlaySound.js";
 import Swal from 'sweetalert2';
 import { useRouter } from 'vue-router'
 import UseWait from '@/composables/UseWait';
 import CountUpComponent from '@/components/CountUpComponent.vue';
+import { getDatabase, ref as dbRef, serverTimestamp, push } from "firebase/database";
 
 const participantStore = useParticipantStore();
 const { playSoundAsync } = UsePlaySound();
@@ -80,10 +81,13 @@ onMounted(() => {
 })
 
 const response = ref(null);
-
+let dataToSave
 const onSubmitResponseClick = async () => {
-    //TODO: save response.value to Firebase
-    console.log(response.value);
+    dataToSave = structuredClone(toRaw(currentItem.value)) //{ ...currentItem.value };
+    dataToSave.response = response.value;
+    dataToSave.timestamp = serverTimestamp();
+    dataToSave.pid = participantStore.pid;
+    //console.log(response.value);
     if (response.value > 1 && currentItem.value.t2choice1 != '') {
         state.value = "followup";
     } else {
@@ -94,7 +98,8 @@ const onSubmitResponseClick = async () => {
 
 const onSubmitFollowupResponseClick = (followUpResponse) => {
     //TODO: save follow up response to Firebase
-    console.log(followUpResponse);
+    dataToSave.followUpResponse = followUpResponse;
+    //console.log(followUpResponse);
 
     //clear out radio buttons
     response.value = null;
@@ -116,6 +121,8 @@ const nextItem = async () => {
 const endCount = async (speechDetected) => {
     //TODO: save speechDetected boolean to Firebase
     console.log("speech detected?",speechDetected);
+    dataToSave.speechDetected = speechDetected;
+    push(dbRef(getDatabase(), "data/" + participantStore.pid), dataToSave);
     
     //hide count up component
     await wait(500);

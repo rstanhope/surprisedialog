@@ -5,7 +5,7 @@ export const useParticipantStore = defineStore('participantStore', () => {
   const list = ref(null)
   const pid = ref(null)
   const index = ref(0)
-  const taskType = ref("t1"); //t1 = Question-answer congruence task, t2 = Surprise task
+  const taskType = ref("t2"); //t1 = Question-answer congruence task, t2 = Surprise task
 
   return { list, pid, index, taskType}
 }, {

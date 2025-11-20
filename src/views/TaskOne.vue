@@ -24,7 +24,7 @@
 </template>
 
 <script setup>
-import { computed, onMounted, ref } from 'vue';
+import { computed, onMounted, ref, toRaw } from 'vue';
 import { useParticipantStore } from "@/stores/useParticipantStore.js";
 import UsePlaySound from "@/composables/UsePlaySound.js";
 import UseWait from '@/composables/UseWait';
@@ -57,14 +57,14 @@ const play = async () => {
     state.value = "responding";
 }
 
+let dataToSave
 const onResponseClick = (response) => {
-    //store response on Firebase
-    let dataToSave = { ...currentItem.value };
-    dataToSave.response = response.value;
+    //hold data in dataToSave variable to be stored in Firebase
+    dataToSave = structuredClone(toRaw(currentItem.value)) //{ ...currentItem.value };
+    dataToSave.response = response;
     dataToSave.timestamp = serverTimestamp();
     dataToSave.pid = participantStore.pid;
-    push(dbRef(getDatabase(), participantStore.pid), dataToSave);
-
+    //console.log(dataToSave);
     //console.log(response);
 
     //incremenet item index
@@ -79,8 +79,10 @@ const onResponseClick = (response) => {
 
 //when count up mini-task is completed, play nexttrial
 const endCount = async (speechDetected) => {
-    //TODO: save speechDetected boolean to Firebase
+    //save dataToSave and speechDetected boolean to Firebase
     console.log("speech detected?", speechDetected);
+    dataToSave.speechDetected = speechDetected;
+    push(dbRef(getDatabase(), "data/" + participantStore.pid), dataToSave);
 
     //hide count up component
     await wait(500);
