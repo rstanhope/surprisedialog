@@ -2,8 +2,8 @@
     <v-container>
         <h1 class="text-center" v-if="state == 'fixation'">+</h1>
         <div class="d-flex flex-column align-center justify-center" v-if="state == 'listening'">
-            <div v-if="currentItem?.t2dialog != ''" class="bubble">
-                <h2>{{ currentItem?.t2dialog }}</h2>
+            <div class="bubble" v-if="currentItem.t2image">
+                <v-img :src="'images/' + currentItem.t2image" min-width="600px" max-width="600px" class="ml-auto mr-auto"></v-img>
             </div>
             <div>
                 <h3 class="mt-4 font-weight-thin text-medium-emphasis font-italic">Please listen...</h3>
@@ -155,6 +155,7 @@ const play = async () => {
 }
 
 .bubble {
+    width: 600px;
     position: relative;
     background: gainsboro;
     text-align: center;
