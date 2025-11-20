@@ -83,3 +83,14 @@ const taskType = ref("t1"); //t1 = task one, t2 = task two
 //replace this with Qualtrics survey URL or Prolific completion URL
 let redirect_url = "https://www.google.com";
 ```
+### A note about browser persistence
+- While browser refreshing is discouraged, session persistence is activated which will resume from the last trial if the browser window is refreshed via the [pinia-plugin-persistedstate](https://codeberg.org/praz/pinia-plugin-persistedstate.git) plugin.
+- This can occasionally be problematic during the development stages as any recent changes may not come through due to the browser referencing older cachced data.
+- Possible workarounds during development:
+  - Close and reopen a browser window
+  - Temporarily disable browser persistence by modifying /stores/useParticipantStore.js
+  ``` js
+  //change true to false to disable browser persistence
+  persist: true
+  ```
+  - From the browser developer tools panel, delete session storage for localhost app
