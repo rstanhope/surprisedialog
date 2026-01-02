@@ -59,7 +59,8 @@ const next = async () => {
             console.log(res);
             throw ("Error loading list file");
         } else {
-            participantStore.list = res.data;
+            participantStore.list = createBlocks(res.data);
+            //participantStore.list = res.data;
         }
     } catch (error) {
         console.log(error);
@@ -87,4 +88,49 @@ const loadLists = (listFile) => {
         });
     })
 }
+
+function createBlocks(list){
+    let blockedList = [];
+    let groupedList = groupBy(list, 'itemType');
+    groupedList.presentabsent = shuffle(groupedList.presentabsent);
+    groupedList.NPAsubjobj = shuffle(groupedList.NPAsubjobj);
+    groupedList.filler = shuffle(groupedList.filler);
+    let index16 = 0;
+    let index8 = 0
+    for(index16=0;index16<16;index16+=2){
+        blockedList.push(shuffle([groupedList.presentabsent[index16], groupedList.presentabsent[index16 + 1], groupedList.NPAsubjobj[index8], groupedList.filler[index8]]));
+        index8 +=1;
+    }
+    blockedList = blockedList.flat()
+    //console.log(blockedList)
+    return blockedList
+
+}
+
+function groupBy(arr, key) {
+  return arr.reduce((result, currentValue) => {
+    // Get the value of the key for the current object
+    const groupKey = currentValue[key];
+
+    // If the key doesn't exist in the result object, create an empty array
+    if (!result[groupKey]) {
+      result[groupKey] = [];
+    }
+
+    // Push the current object to the corresponding group
+    result[groupKey].push(currentValue);
+
+    return result;
+  }, {});
+}
+
+function shuffle(array) {var m = array.length,t,i;
+while (m) {i = Math.floor(Math.random() * m--);
+t = array[m];
+array[m] = array[i];
+array[i] = t;
+}
+return array;
+}
+
 </script>
