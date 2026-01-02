@@ -13,6 +13,13 @@ const router = createRouter({
       name: 'consent',
       component: () => import("../views/ConsentView.vue")
     },
+
+    {
+      path: "/instructions",
+      name: 'instructions',
+      component: () => import("../views/InstructionsView.vue")
+    },
+
     {
       path: "/audioTest",
       name: 'audioTest',

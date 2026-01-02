@@ -1,9 +1,9 @@
 <template>
     <v-container>
         <h1>Introduction</h1>
-        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Esse minima soluta porro laborum? Doloribus cum
-            laborum labore quos, quasi eius repellat optio nostrum debitis suscipit officiis libero tempora, asperiores
-            maxime!</p>
+        <p>
+      Welcome to our study. Please press the "Next" button below to proceed to the consent form and audio setup.
+        </p>
         <v-btn @click="next" class="mt-4" color="primary">Next <v-icon>chevron_right</v-icon></v-btn>
     </v-container>
 </template>

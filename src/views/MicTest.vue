@@ -77,7 +77,7 @@
         <div style="width: 50%; height:6px;background-color: orange;margin-top:2px"></div>
         <div style="width: 50%; height:6px;background-color: green;margin-top:2px;margin-left:4px;"></div>
         </div>
-        <v-btn class="mt-6" color="primary" @click="toTask">Next <v-icon>chevron_right</v-icon></v-btn>
+        <v-btn class="mt-6" color="primary" @click="toInstructions">Next <v-icon>chevron_right</v-icon></v-btn>
     </v-container>
 </template>
 
@@ -102,9 +102,14 @@ onUnmounted(() => {
     stopMeter();
 })
 
-
+/*
 const toTask = () => {
     router.push("/" + participantStore.taskType)
+}
+*/
+
+const toInstructions = () => {
+    router.push("/instructions");
 }
 </script>
 
