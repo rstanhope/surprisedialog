@@ -99,7 +99,6 @@ const onSubmitResponseClick = async () => {
 }
 
 const onSubmitFollowupResponseClick = (followUpResponse) => {
-    //TODO: save follow up response to Firebase
     dataToSave.followUpResponse = followUpResponse;
     //console.log(followUpResponse);
 
@@ -121,7 +120,6 @@ const nextItem = async () => {
 }
 
 const endCount = async (speechDetected) => {
-    //TODO: save speechDetected boolean to Firebase
     console.log("speech detected?",speechDetected);
     dataToSave.speechDetected = speechDetected;
     push(dbRef(getDatabase(), "data/" + participantStore.pid), dataToSave);
@@ -140,6 +138,13 @@ const endCount = async (speechDetected) => {
 }
 
 const play = async () => {
+    //wait 1000ms if there is a dialog displayed
+    if(currentItem.value?.t2dialog !=''){
+        console.log("waiting...")
+        await wait(1000);
+        console.log("playing...")
+    }
+    
     await playSoundAsync("audio/" + currentItem.value.audio)
     state.value = "responding"
 }
