@@ -138,10 +138,10 @@ const endCount = async (speechDetected) => {
 }
 
 const play = async () => {
-    //wait 1000ms if there is a dialog displayed
+    //wait 2000ms if there is a dialog displayed
     if(currentItem.value?.t2dialog !=''){
         console.log("waiting...")
-        await wait(1000);
+        await wait(2000);
         console.log("playing...")
     }
     
