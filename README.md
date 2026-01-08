@@ -2,6 +2,12 @@
 
 Surprise Dialog Experiment
 
+This web experiment displays text and plays sounds to the participant who then responds via radiobuttons and a set of two button forced choice interface.
+
+Items are retrived from public/list.txt and divided into four blocks of 12 (8 presentabsent, 2 NPAsubjobj, 2 filler). The 8 presentabsent items are equally distributed by `item` across the four blocks. 
+
+If, after shuffling, the final `item` of one block happens to be the same as the first `item` of the following block, the block is reshuffled as many times as needed to avoid overlaps.
+
 ## Recommended IDE Setup
 
 [VS Code](https://code.visualstudio.com/) + [Vue (Official)](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur).
@@ -39,6 +45,8 @@ The "pid" URL parameter represents the participant's unique identifier
 
 ```sh
 npm run build
+firebase login
+firebase deploy
 ```
 
 ### Lint with [ESLint](https://eslint.org/)
