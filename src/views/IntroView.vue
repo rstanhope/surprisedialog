@@ -4,11 +4,12 @@
         <p>
             Welcome to our study. Please press the "Next" button below to proceed to the consent form and audio setup.
         </p>
-        <v-data-table multi-sort="" items-per-page="50" density="compact" v-if="participantStore.list !== null" :items="participantStore.list">
+        <!-- data table that displays all items. for debugging purposes. -->
+        <!-- <v-data-table multi-sort="" items-per-page="50" density="compact" v-if="participantStore.list !== null" :items="participantStore.list">
             <template v-slot:[`item.t2dialog`]="{ value }">
                 <p class="text-truncate" style="max-width: 100px;">{{value }}</p>
             </template>
-        </v-data-table>
+        </v-data-table> -->
         <v-btn @click="next" class="mt-4" color="primary">Next <v-icon>chevron_right</v-icon></v-btn>
     </v-container>
 </template>
@@ -20,7 +21,6 @@ import * as Tone from 'tone';
 import Papa from "papaparse";
 import { useParticipantStore } from "@/stores/useParticipantStore.js";
 import Swal from "sweetalert2";
-//import { getDatabase, ref as dbRef, child, get } from "firebase/database";
 
 const participantStore = useParticipantStore();
 const router = useRouter();
@@ -68,7 +68,6 @@ const next = async () => {
             throw ("Error loading list file");
         } else {
             participantStore.list = createBlocks(res.data);
-            //participantStore.list = res.data;
         }
     } catch (error) {
         console.log(error);
@@ -79,8 +78,7 @@ const next = async () => {
         })
         return;
     }
-
-    //router.push("/consent");
+    router.push("/consent");
 }
 
 const loadLists = (listFile) => {
@@ -143,7 +141,7 @@ function createBlocks(list) {
     //shuffle blocks
     for(let b=0;b<blockedList.length;b++){
         blockedList[b] = shuffle(blockedList[b]);
-        console.log(blockedList[b]);
+        //console.log(blockedList[b]);
     }
     
     //check for overlapping items between blocks
