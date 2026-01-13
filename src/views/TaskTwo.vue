@@ -89,7 +89,7 @@ const onSubmitResponseClick = async () => {
     dataToSave.response = response.value;
     dataToSave.timestamp = serverTimestamp();
     dataToSave.pid = participantStore.pid;
-    //console.log(response.value);
+    console.log("SAVE TO FIREBASE", response.value);
     if (response.value > 1 && currentItem.value.t2choice1 != '') {
         state.value = "followup";
     } else {
@@ -112,11 +112,7 @@ const onSubmitFollowupResponseClick = (followUpResponse) => {
 
 const nextItem = async () => {
     participantStore.index += 1;
-    if (participantStore.index >= participantStore.list.length) {
-        router.push("/end")
-    } else {
-        showCountUp.value = true;
-    }
+    showCountUp.value = true;
 }
 
 const endCount = async (speechDetected) => {
@@ -127,14 +123,18 @@ const endCount = async (speechDetected) => {
     //hide count up component
     await wait(500);
     showCountUp.value = false;
-    
-    //show fixation cross for 1000ms
-    state.value = "fixation"
-    await wait(1000);
-    state.value = "listening"
 
-    //play next sound
-    play();
+    //check if we are at the end of the list
+    if (participantStore.index >= participantStore.list.length) {
+        //if yes, go to end route
+        router.push("/end")
+    } else {
+        //if no, show fixation cross for 1000ms and then play next sound
+        state.value = "fixation"
+        await wait(1000);
+        state.value = "listening"
+        play();
+    }
 }
 
 const play = async () => {

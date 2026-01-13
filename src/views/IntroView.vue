@@ -68,6 +68,9 @@ const next = async () => {
             throw ("Error loading list file");
         } else {
             participantStore.list = createBlocks(res.data);
+
+            //for testing purposes, truncate the list to 3 items
+            //participantStore.list = participantStore.list.slice(0, 3);
         }
     } catch (error) {
         console.log(error);

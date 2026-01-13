@@ -69,10 +69,6 @@ const onResponseClick = (response) => {
 
     //incremenet item index
     participantStore.index += 1;
-    if (participantStore.index >= participantStore.list.length) {
-        router.push("/end")
-    }
-
     //display count up component
     showCountUp.value = true;
 }
@@ -88,13 +84,20 @@ const endCount = async (speechDetected) => {
     await wait(500);
     showCountUp.value = false;
 
-    //show fixation cross for 1000ms
-    state.value = "fixation"
-    await wait(1000);
-    state.value = "listening"
+    //check if we are at the end of the list
+    if (participantStore.index >= participantStore.list.length) {
+        //if yes, go to end route
+        router.push("/end")
+    } else {
+        //show fixation cross for 1000ms
+        state.value = "fixation"
+        await wait(1000);
+        state.value = "listening"
 
-    //play next sound
-    play();
+        //play next sound
+        play();
+    }
+    
 }
 </script>
 
