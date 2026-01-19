@@ -12,7 +12,8 @@ import { useParticipantStore } from "@/stores/useParticipantStore.js";
 const participantStore = useParticipantStore();
 
 //redirect to your Qualtrics URL or Prolific completion URL here
-let redirect_url = "https://northwestern.az1.qualtrics.com/jfe/form/SV_0VvLXEWqyfbkR8y";
+//let redirect_url = "https://northwestern.az1.qualtrics.com/jfe/form/SV_0VvLXEWqyfbkR8y";
+let redirect_url = "https://northwestern.az1.qualtrics.com/jfe/form/SV_2l6xW9Zw2iK56Dk";
 
 
 const next = () => {
