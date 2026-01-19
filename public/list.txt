@@ -41,8 +41,8 @@ molly	Molly peeled the lemon	NPAsubjobj	molly_NPAsubj.mp3	Who peeled the lemon?	
 molly	Molly peeled the lemon	NPAsubjobj	molly_NPAobj.mp3	Who peeled the lemon?	What did Molly peel?	"Molly, Ben, and Tyler are making marmalade. The recipe calls for oranges and a lemon. They each peeled one fruit."	"Oh, you're surprised that it was Molly who peeled the lemon, and not Tyler?"	"Oh, you're surprised that Molly peeled the lemon, and not an orange?"
 arcade	She went to the arcade	filler	filler_arcade.mp3	What did Ellen do?	Where did Ellen go?			
 arcade2	She went to the arcade	filler	filler_arcade_2.mp3	What did Ellen do?	Where did Ellen go?			
-hike	She went for a hike	filler	filler_hike.mp3	What did Lisa do?	Where did Lisa go?			
-hike2	She went for a hike	filler	filler_hike_2.mp3	What did Lisa do?	Where did Lisa go?			
+hike	He went for a hike	filler	filler_hike.mp3	What did Liam do?	Where did Liam go?			
+hike2	He went for a hike	filler	filler_hike_2.mp3	What did Liam do?	Where did Liam go?			
 restaurant	He went to a restaurant	filler	filler_restaurant.mp3	What did Joey do?	Where did Joey go?			
 restaurant2	He went to a restaurant	filler	filler_restaurant_2.mp3	What did Joey do?	Where did Joey go?			
 hockey	She watched hockey	filler	filler_hockey.mp3	What did Hazel do?	What did Hazel watch?			
